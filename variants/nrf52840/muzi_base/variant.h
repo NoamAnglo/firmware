@@ -100,13 +100,17 @@ extern "C" {
 #define LR11X0_DIO3_TCXO_VOLTAGE 3.0
 #define LR11X0_DIO_AS_RF_SWITCH
 
-// GPS
-#define GPS_RX_PIN (0 + 20)  // P0.20
-#define GPS_TX_PIN (0 + 19)  // P0.19
+// GPS (disabled - pins reassigned to Serial2 for SerialModule)
+#define GPS_RX_PIN (-1)
+#define GPS_TX_PIN (-1)
 #define GPS_EN_GPIO (32 + 1) // P1.01
 
-#define PIN_SERIAL1_RX GPS_RX_PIN
-#define PIN_SERIAL1_TX GPS_TX_PIN
+#define PIN_SERIAL1_RX (-1)
+#define PIN_SERIAL1_TX (-1)
+
+// SerialModule UART (wired to GPS_RX = P0.20 and GPS_TX = P0.19)
+#define PIN_SERIAL2_RX (0 + 20) // P0.20 (GPS_RX pad)
+#define PIN_SERIAL2_TX (0 + 19) // P0.19 (GPS_TX pad)
 
 #define PIN_BUZZER (0 + 22) // P0.22
 

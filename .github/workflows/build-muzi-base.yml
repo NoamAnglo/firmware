@@ -1,0 +1,33 @@
+name: Build muzi-base
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO and build dependencies
+        run: |
+          pip install -U platformio protobuf grpcio-tools
+
+      - name: Build muzi-base firmware
+        run: |
+          pio run -e muzi-base
+
+      - name: Upload UF2 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-muzi-base
+          path: .pio/build/muzi-base/firmware-muzi-base-*.uf2
